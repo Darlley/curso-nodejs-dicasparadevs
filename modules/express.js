@@ -5,13 +5,23 @@ const UserModel = require('../src/models/user.model')
 const app = express()
 app.use(express.json());
 
+app.set("view engine", "ejs")
+app.set("views", "src/views")
+
 app.use((req,res,next) => {
-  
+  console.log(`Request Type: ${req.method}`)
+  console.log(`Content Type: ${req.headers['content-type']}`)
+  console.log(`Date: ${new Date()}`)
+
+  next()
 })
 
-app.get('/', (req,res) => {
-  res.contentType('text/html')
-  res.status(200).end('<h1>home</h1>')
+app.get('/', async (req,res) => {
+  const users = await UserModel.find()
+  console.log(users)
+  res.render("index", {
+    users
+  })
 })
 
 app.get('/users', async (req,res) => {

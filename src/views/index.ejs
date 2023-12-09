@@ -1,0 +1,19 @@
+<%- include('./partials/head.ejs') %>
+<body>
+  <%- include('./partials/navbar.ejs') %>
+  <div class="content">
+
+    <% if (users.length > 0) { %>
+    <ol>
+      <% users.forEach((user) => { %>
+      <li>
+        <h3><%= user.firstName %> <%= user.lastName %></h1>
+        <p>E-mail: <%= user.email %></p>
+        <p>Senha: <%= user.password.slice(0,2) %>*******</p>
+      </li>
+      <% }) %>
+    </ol>
+    <% } %>
+  </div>
+</body>
+</html>
